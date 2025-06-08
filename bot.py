@@ -60,13 +60,10 @@ class VolumeModal(Modal, title="🔊 ปรับเสียง 1-100%"):
             await interaction.response.send_message("❌ ใส่ตัวเลข 1-100 เท่านั้น", ephemeral=True)
 
 class QueueDropdown(discord.ui.Select):
-    def __init__(self, placeholder="เลือกเพลงจากคิว"):
-        super().__init__(
-            placeholder=placeholder,
-            options=[],
-            min_values=1,
-            max_values=1
-        )
+    def __init__(self, placeholder="เลือกเพลง", options=None):
+        if options is None:
+            options = []
+        super().__init__(placeholder=placeholder, options=options, min_values=1, max_values=1)
 
     async def callback(self, interaction: discord.Interaction):
         global music_queue
